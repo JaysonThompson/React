@@ -10,42 +10,40 @@ class AddFishForm extends React.Component {
   createFish = e => {
     e.preventDefault();
     const fish = {
-      name: this.nameRef.value.value,
-      price: parseFloat(this.priceRef.value.value),
-      status: this.statusRef.value.value,
-      desc: this.descRef.value.value,
-      image: this.imageRef.value.value
+      name: this.nameRef.current.value,
+      price: this.priceRef.current.value,
+      status: this.statusRef.current.value,
+      desc: this.descRef.current.value,
+      image: this.imageRef.current.value
     };
-    //this.props.addFish(fish);
-    this.props.addFish(fish);
-    e.currentTarget.reset();
+    console.log(fish);
   };
 
   render() {
     return (
-      <form className="fish-edit" onSubmit={this.createFish}>
+      <form action="" className="fish-edit" onSubmit={this.createFish}>
         <input
-          type="text"
-          name="name"
           ref={this.nameRef}
+          name="name"
           placeholder="Fish Name"
+          type="text"
         />
         <input
-          type="text"
-          name="price"
           ref={this.priceRef}
+          name="price"
           placeholder="Fish Price"
+          type="text"
         />
-        <select name="status" ref={this.statusRef}>
+        <select ref={this.statusRef} name="status">
           <option value="available">Fresh!</option>
           <option value="unavailable">Sold Out!</option>
         </select>
-        <textarea name="desc" ref={this.descRef} placeholder="Desc" />
+        <textarea ref={this.descRef} name="desc" placeholder="Desc" />
         <input
-          type="text"
-          name="image"
           ref={this.imageRef}
-          placeholder="Fish Image"
+          name="image"
+          placeholder="Image"
+          type="text"
         />
         <button type="submit">+ Add Fish</button>
       </form>
