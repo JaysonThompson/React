@@ -8,42 +8,47 @@ class AddFishForm extends React.Component {
   imageRef = React.createRef();
 
   createFish = e => {
+    // Prevents the form from automatically submitting
     e.preventDefault();
+    // Create fish object from form inputs
     const fish = {
-      name: this.nameRef.current.value,
-      price: this.priceRef.current.value,
-      status: this.statusRef.current.value,
-      desc: this.descRef.current.value,
-      image: this.imageRef.current.value
+      name: this.nameRef.value.value,
+      price: parseFloat(this.priceRef.value.value),
+      status: this.statusRef.value.value,
+      desc: this.descRef.value.value,
+      image: this.imageRef.value.value
     };
-    console.log(fish);
+    // Add newly created fish to current state
+    this.props.addFish(fish);
+    // Resets the form after submitting
+    e.currentTarget.reset();
   };
 
   render() {
     return (
-      <form action="" className="fish-edit" onSubmit={this.createFish}>
+      <form className="fish-edit" onSubmit={this.createFish}>
         <input
-          ref={this.nameRef}
-          name="name"
-          placeholder="Fish Name"
           type="text"
+          ref={this.nameRef}
+          placeholder="Fish Name"
+          name="name"
         />
         <input
-          ref={this.priceRef}
-          name="price"
-          placeholder="Fish Price"
           type="text"
+          ref={this.priceRef}
+          placeholder="Fish Price"
+          name="price"
         />
         <select ref={this.statusRef} name="status">
           <option value="available">Fresh!</option>
           <option value="unavailable">Sold Out!</option>
         </select>
-        <textarea ref={this.descRef} name="desc" placeholder="Desc" />
+        <textarea ref={this.descRef} placeholder="Desc" name="desc" />
         <input
-          ref={this.imageRef}
-          name="image"
-          placeholder="Image"
           type="text"
+          ref={this.imageRef}
+          placeholder="Fish Image"
+          name="image"
         />
         <button type="submit">+ Add Fish</button>
       </form>
