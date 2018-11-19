@@ -8,7 +8,9 @@ class AddFishForm extends React.Component {
   imageRef = React.createRef();
 
   createFish = e => {
+    // Prevents the form from automatically submitting
     e.preventDefault();
+    // Create fish object from form inputs
     const fish = {
       name: this.nameRef.value.value,
       price: parseFloat(this.priceRef.value.value),
@@ -16,8 +18,9 @@ class AddFishForm extends React.Component {
       desc: this.descRef.value.value,
       image: this.imageRef.value.value
     };
-    //this.props.addFish(fish);
+    // Add newly created fish to current state
     this.props.addFish(fish);
+    // Resets the form after submitting
     e.currentTarget.reset();
   };
 
@@ -26,26 +29,26 @@ class AddFishForm extends React.Component {
       <form className="fish-edit" onSubmit={this.createFish}>
         <input
           type="text"
-          name="name"
           ref={this.nameRef}
           placeholder="Fish Name"
+          name="name"
         />
         <input
           type="text"
-          name="price"
           ref={this.priceRef}
           placeholder="Fish Price"
+          name="price"
         />
-        <select name="status" ref={this.statusRef}>
+        <select ref={this.statusRef} name="status">
           <option value="available">Fresh!</option>
           <option value="unavailable">Sold Out!</option>
         </select>
-        <textarea name="desc" ref={this.descRef} placeholder="Desc" />
+        <textarea ref={this.descRef} placeholder="Desc" name="desc" />
         <input
           type="text"
-          name="image"
           ref={this.imageRef}
           placeholder="Fish Image"
+          name="image"
         />
         <button type="submit">+ Add Fish</button>
       </form>
